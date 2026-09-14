@@ -1,5 +1,24 @@
 #~/bin/bash
 
+set -euo pipefail
+
+# --- Input Validation ----
+# Accept an optional first argument as a custom base directory.
+# If none is provided, fall back to the defualt.
+TARGET_DIR="${1:-$HOME/bash-automation-project/generated}"
+
+# Validate: does the parent directory of the taget even exist?
+# (We don't require the target itself to exist yet = mkdir -p will create itbut its PARENT should be a real, valid location, not garbage input.)
+PARENT_DIR=$(dirname "$TARGET_DIR")
+
+if [ ! -d "$PARENT_DIR" ]; then
+     echo "ERROR: Parent directory '$PARENT_DIR does not exist. Cannot proceed."
+     exit 1
+fi
+
+echo "Validated target directory: $TARGET_DIR"
+BASE_DIR=$TARGET_DIR
+
 # Task 1: Automate Directory and File Creation
 # This script creates a nested directory structure with dynamic files.
 
@@ -38,6 +57,6 @@ if [ ! -f "$CONFIG_FILE" ]; then
     echo "environment=development" > "$CONFIG_FILE"
     echo "Created config file: $CONFIG_FILE"
 else
-    echo "Config file already exists, leaving untouched: $CONFIG_FIEL"
+    echo "Config file already exists, leaving untouched: $CONFIG_FILE"
 fi
 

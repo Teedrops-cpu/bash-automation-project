@@ -1,6 +1,15 @@
 #!/bin/bash
+set -euo pipefail
 
-# Task 2: System Health Monitor - refactored with functions
+# --- Cleanup trap ----
+# This runs automatically whenever the script exits, for any reason -  normal  completion, an error, or the user pressing Ctrl+C.
+
+cleanup() {
+      echo "Health monitor script finished. Exit code: $?"
+}
+trap cleanup EXIT
+
+# Task 3: System Health Monitor - refactored with functions
 # Checks disk, memory, and process count against threshold using a reusable function.
 
 # ---- Reusable threshold-check function ----
