@@ -1,2 +1,5 @@
-# Runtime-generated files - not source code, shouldn't be version control generated/
+# Runtime-generated files - not source code, shouldn't be version controlled
+generated/
+
+# Windows metadata files
 *:Zone.Identifier
